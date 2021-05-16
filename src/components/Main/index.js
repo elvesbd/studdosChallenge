@@ -1,21 +1,21 @@
-import { useContext } from 'react';
+import { useState } from 'react';
 
-import { TasksContext } from '../../App';
-
-import Card from '../Card';
 import CardMain from '../CardMain';
 import Footer from '../Footer';
 import SearchInput from '../SearchInput';
+import InProgressTasks from '../InProgressTasks';
+import NewTasks from '../NewTasks';
 
 import './styles.css';
 
 
 
 export default function Main() {
-  const datas = useContext(TasksContext);
+  const [selected, setSelected] = useState([]);
 
-  function handleInProgress(status) {
-    console.log({status})
+  function handleSelectedTasks(e) {
+    e.preventDefault();
+    
   }
 
   return (
@@ -35,24 +35,20 @@ export default function Main() {
         <header className="headerContainer">
           <div className="headerContent">
             <nav>
-              <a onClick={() => handleInProgress()} href="#" className="active">Novas</a>
-              <a href="#">Em andamento</a>
+              <a href="" className="active">Novas</a>
+              <a href="">Em andamento</a>
               <a href="#">Finalizadas</a>
             </nav>
           </div>
         </header>
 
-        {datas.map(data => (
-          <Card
-            key={data.id}
-            date={data.date}
-            title={data.title}
-            subject={data.subject}
-            teacher={data.teacher}
-            questionsCompleted={data.questionsCompleted}
-            questions={data.questions}
-          />
-        ))}
+        {selected ? (<NewTasks />) : (<InProgressTasks />)}
+
+        {/* {datas.questionsCompleted ? (
+          <InProgressTasks />
+        ) : (
+          <NewTasks />
+        )} */}
       </section>
     </div>
   );

@@ -7,11 +7,11 @@ import Card from '../Card';
 export default function InProgressTasks() {
   const datas = useContext(TasksContext);
   
-  const inProgressTasks = datas.filter((task) => task.questionsCompleted > 0);
- 
+  const newTasks = datas.filter((task) => task.questionsCompleted === 0);
+  
   return (
     <>
-      {inProgressTasks.map(task => (
+      {newTasks.map(task => (
         <Card
           key={task.id}
           date={task.date}

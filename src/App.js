@@ -17,16 +17,6 @@ function App() {
       setDatas(response.data.entities);
   })()}, []);
 
-  /* function handleDateRefresh(x, y) {
-    setDatas((prevState) => [
-      ...prevState,
-      {
-        date: y.prevState.date - x.prevState.date
-      }
-    ]);
-  };
-  handleDateRefresh(); */
-
   return (
     <div className="app-container">
       <TasksContext.Provider value={datas}>
