@@ -4,10 +4,10 @@ import { TasksContext } from '../../App';
 import Card from '../Card';
 
 
-export default function InProgressTasks() {
+export default function NewTasks() {
   const datas = useContext(TasksContext);
   
-  const newTasks = datas.filter((task) => task.questionsCompleted === 0);
+  const newTasks = datas.filter((prevState) => prevState.questionsCompleted === 0);
   
   return (
     <>
@@ -21,7 +21,7 @@ export default function InProgressTasks() {
           questionsCompleted={task.questionsCompleted}
           questions={task.questions}
         />
-      ))};
+      ))}
     </>  
   );
 };

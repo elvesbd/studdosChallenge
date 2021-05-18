@@ -1,3 +1,6 @@
+import format from 'date-fns/format';
+import ptBR from 'date-fns/locale/pt-BR';
+
 export function DateFormat(props) {
   const date = new Date(props),
   day = date.getDate().toString().padStart(2, '0'),

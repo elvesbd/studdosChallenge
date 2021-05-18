@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from 'react';
 
 import Header from './components/Header';
 import Main from './components/Main';
+import SideBar from './components/SideBar';
+
 import api from './services/api';
 
 import './styles/global.css';

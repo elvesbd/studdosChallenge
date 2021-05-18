@@ -7,7 +7,7 @@ import Card from '../Card';
 export default function InProgressTasks() {
   const datas = useContext(TasksContext);
   
-  const inProgressTasks = datas.filter((task) => task.questionsCompleted > 0);
+  const inProgressTasks = datas.filter((prevState) => prevState.questionsCompleted > 0);
  
   return (
     <>
