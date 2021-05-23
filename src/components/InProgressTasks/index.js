@@ -11,15 +11,16 @@ export default function InProgressTasks() {
  
   return (
     <>
-      {inProgressTasks.map(task => (
+      {inProgressTasks.map((task, index) => (
         <Card
-          key={task.id}
+          key={index}
           date={task.date}
           title={task.title}
           subject={task.subject}
           teacher={task.teacher}
           questionsCompleted={task.questionsCompleted}
           questions={task.questions}
+          type={task.type}
         />
       ))};
     </>  

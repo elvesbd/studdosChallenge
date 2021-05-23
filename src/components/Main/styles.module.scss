@@ -1,17 +1,16 @@
-.body-container {
+.bodyContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
 
-.home-container {
+.homeContainer {
   width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  background: var(--body);
 }
 
-.main-container {
+.mainContainer {
   width: 47.25rem;
   height: auto;
   margin-left: 1.875rem;

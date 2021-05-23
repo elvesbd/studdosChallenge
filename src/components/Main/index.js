@@ -2,16 +2,16 @@ import CardMain from '../CardMain';
 import Footer from '../Footer';
 import SideBar from '../SideBar';
 
-import './styles.css';
+import styles from './styles.module.scss';
 
 
 
 export default function Main() {
   
   return (
-    <div className="body-container">
-      <div className="home-container">
-        <section className="main-container">
+    <div className={styles.bodyContainer}>
+      <div className={styles.homeContainer}>
+        <section className={styles.mainContainer}>
           <CardMain />
           <Footer />
         </section>

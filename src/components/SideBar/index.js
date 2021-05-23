@@ -1,46 +1,50 @@
 import { useState } from 'react';
 
-import NewTasks from '../NewTasks'
-import InProgressTasks from '../InProgressTasks'
+import NewTasks from '../NewTasks';
+import InProgressTasks from '../InProgressTasks';
+import { FinishTasks } from '../FinishTasks';
 import SearchInput from '../SearchInput';
 
-import './styles.css';
+import styles from'./styles.module.scss';
 
 
 export default function SideBar() {
   const [selectedComponent, setSelectedComponent] = useState("NewTasks");
-  const [active, setActive] = useState('');
-  
   
    const componentsToSelect = {
     InProgressTasks: <InProgressTasks />,
     NewTasks: <NewTasks />,
-    //Finish: <Finish />,
+    FinishTasks: <FinishTasks />,
   };
 
   return (
     <div className="body-container">
-      <section className="sidebar-container">
-        <div className="header-sidebar">
+      <section className={styles.sidebarContainer}>
+        <div>
           <h4>Próximas entregas</h4>
         </div>
 
         <SearchInput />
         
-        <header className="headerContainer">
-          <div className="headerContent">
+        <header className={styles.headerContainer}>
+          <div className={styles.headerContent}>
             <nav>
               <button 
-                onClick={() => {setSelectedComponent("NewTasks"); setActive('active')}}
-                className={active ? "active" : ''}>
-                  Novas
+                onClick={() => {setSelectedComponent("NewTasks")}}
+                className={styles.active}
+              >
+                Novas
               </button>
               <button 
-                onClick={() => {setSelectedComponent("InProgressTasks"); setActive()}}
-                className={active ? "" : 'active'}>
-                  Em andamento
+                onClick={() => {setSelectedComponent("InProgressTasks")}}
+              >
+                Em andamento
               </button>
-              <button>Finalizadas</button>
+              <button 
+                onClick={() => {setSelectedComponent("FinishTasks")}}
+              >
+                Finalizadas
+              </button>
             </nav>
           </div>
         </header>
@@ -51,3 +55,5 @@ export default function SideBar() {
     </div>
   );
 };
+
+//{...(selected && { className: 'selected' })}  color={selected ? '#FAE800' : '#FBFBFB'} 

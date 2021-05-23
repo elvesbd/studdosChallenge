@@ -1,0 +1,65 @@
+.sidebarContainer {
+  width: 23.25rem;
+  height: 43.3125rem;
+  margin: 0 auto;
+  overflow: auto;
+
+  background: var(--blue-200);
+
+  h4 {
+    padding: 1rem;
+    font-size: 1.125rem;
+    font-family: Roboto;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.3125rem; 
+    color: var(--black-300);
+  }
+
+  .headerContainer {
+    height: 3rem;
+
+    .headerContent {
+      max-width: 331px;
+      height: 3rem;
+      margin: 0 auto;
+
+      nav {
+        display: grid;
+        grid-template-columns: 80px 1fr 108px;
+        gap: 0.5rem;
+
+        button {
+          height: 3rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          line-height: 3rem;
+          text-decoration: none;
+          color: var(--black-300);
+          font-size: 16px;
+          cursor: pointer;
+          border: 0;
+          background: transparent;
+
+          &.active {
+            color: #339CF7;
+
+            &::after {
+              content: '';
+              height: 2px;
+              border-radius: 2px;
+              width: 100%;
+              position: absolute;
+              margin-top: 8px;
+              bottom: 0;
+              left: 0;
+              background: #339CF7;
+            }
+          }
+        }
+      }
+    }
+  }
+}

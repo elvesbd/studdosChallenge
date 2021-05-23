@@ -1,17 +1,16 @@
 import ToggleButton from '../ToggleButton';
 
-import './styles.css';
-
+import styles from './styles.module.scss';
 
 
 export default function Header() {
   return (
-    <div className="header-container">
-      <div className="content-user">
+    <div className={styles.headerContainer}>
+      <div className={styles.contentUser}>
         <img src="/avatar.png" alt="Avatar"/>
         <span>Olá João Paulo</span>
       </div>
-      <div className="theme-content">
+      <div className={styles.themeContent}>
         <span>Modo escuro</span>
         <ToggleButton />
       </div>
