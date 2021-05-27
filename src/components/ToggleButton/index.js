@@ -11,15 +11,6 @@ export default function ToggleButton() {
 
   return (
     <div>
-      {/* <label className="switch">
-        <input 
-          type="checkbox" 
-          checked={theme.themeName}
-					onChange={theme.changeTheme}
-        />
-        <span className="slider round"></span>
-      </label> */}
-
       <Switch
         checked={themeName}
         onChange={changeTheme}

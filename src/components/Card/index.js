@@ -11,7 +11,7 @@ export default function Card(props) {
           <div className={styles.cardContent}>
             <div className={styles.headerCardContent}>
               <img src="/clock_small.svg" alt="Clock"/>
-              <span>Até {DateFormat(props.date)}</span>
+              <time>Até {DateFormat(props.date)}</time>
             </div>
             <div>
               <img src="/cloud_checked.svg" alt="Cloud icon"/>

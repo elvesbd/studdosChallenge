@@ -7,14 +7,13 @@ import Card from '../Card';
 export default function NewTasks() {
   const datas = useContext(TasksContext);
   
-  const newTasks = datas.filter((prevState) => prevState.questionsCompleted === 0);
+  const Tasks = datas.filter((prevState) => prevState.questionsCompleted === 0);
 
-  /* const ordersTasks = newTasks.sort((x, y) => {
-    let a = new Date(x.date)
-    let b = new Date(y.date)
-    return b - a;
-  }) 
-  console.log(ordersTasks) */
+  const newTasks = Tasks.sort(function (x, y) {
+    let a = new Date(x.date);
+    let b = new Date(y.date);
+    return a - b;
+  })
   
   return (
     <>

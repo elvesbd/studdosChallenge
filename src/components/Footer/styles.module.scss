@@ -20,6 +20,10 @@
       & + a {
         margin-left: 1rem;
       }
+
+      path {
+        fill: var(--gray-500);
+      }
     }
   }
 }
