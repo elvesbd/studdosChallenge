@@ -14,7 +14,7 @@ export default function SideBar() {
 
   const [searchInput, setSearchInput] = useState([]);
   const [selectedComponent, setSelectedComponent] = useState("NewTasks");
-  
+  console.log(selectedComponent);
    const componentsToSelect = {
     InProgressTasks: <InProgressTasks />,
     NewTasks: <NewTasks />,
@@ -44,17 +44,19 @@ export default function SideBar() {
             <nav>
               <button 
                 onClick={() => {setSelectedComponent("NewTasks")}}
-                className={styles.active}
+                className={selectedComponent === "NewTasks" ? styles.active: ''}
               >
                 Novas
               </button>
               <button 
                 onClick={() => {setSelectedComponent("InProgressTasks")}}
+                className={selectedComponent === "InProgressTasks" ? styles.active: ''}
               >
                 Em andamento
               </button>
               <button 
                 onClick={() => {setSelectedComponent("FinishTasks")}}
+                className={selectedComponent === "FinishTasks" ? styles.active: ''}
               >
                 Finalizadas
               </button>
