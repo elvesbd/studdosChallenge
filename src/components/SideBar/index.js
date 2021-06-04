@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { TasksContext } from '../../App';
 
 import NewTasks from '../NewTasks';
@@ -7,27 +7,28 @@ import FinishTasks from '../FinishTasks';
 import SearchInput from '../SearchInput';
 
 import styles from'./styles.module.scss';
+import Card from '../Card';
 
 
 export default function SideBar() {
   const datas = useContext(TasksContext)
 
-  const [searchInput, setSearchInput] = useState([]);
   const [selectedComponent, setSelectedComponent] = useState("NewTasks");
-  console.log(selectedComponent);
-   const componentsToSelect = {
+  const[search, setSearch] = useState('');
+
+  const filter = datas.filter((prevState) => prevState.title === search);
+  console.log(filter);
+
+  const componentsToSelect = {
     InProgressTasks: <InProgressTasks />,
     NewTasks: <NewTasks />,
     FinishTasks: <FinishTasks />,
   };
 
-  function handleSearchInput(e) {
-    setSearchInput(e.target.value);
-  };
-
-  function handleSearchSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    console.log(searchInput);
+
+
   };
 
   return (
@@ -37,7 +38,10 @@ export default function SideBar() {
           <h4>Próximas entregas</h4>
         </div>
 
-        <SearchInput onSearchInput={handleSearchInput} onSubmit={handleSearchSubmit}/>
+        <SearchInput  
+          onSearchInput={(e) => setSearch(e.target.value)}
+          onSubmit={handleSubmit}
+        />
         
         <header className={styles.headerContainer}>
           <div className={styles.headerContent}>
@@ -63,9 +67,23 @@ export default function SideBar() {
             </nav>
           </div>
         </header>
-
-        { componentsToSelect[selectedComponent] }
-
+          
+        {search ? (
+          filter.map((task, index) => (
+            <Card task={task}
+              key={index}
+              date={task.date}
+              title={task.title}
+              subject={task.subject}
+              teacher={task.teacher}
+              questionsCompleted={task.questionsCompleted}
+              questions={task.questions}
+              type={task.type}
+            />
+          ))
+        ) : (
+          componentsToSelect[selectedComponent] 
+        )}
       </section>
     </div>
   );
