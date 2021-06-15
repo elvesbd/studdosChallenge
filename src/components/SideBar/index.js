@@ -31,12 +31,7 @@ export default function SideBar() {
     e.preventDefault();
     setSearch(e.target.value);
   };
-//Fala Elves, tudo bem?
-//Nesse caso você teria que criar um novo state, filteredData por exemplo.
-//No handleSubmit, você atualiza esse state com os dados filtrados, e é esse state que você utiliza para mostrar os dados na tela. 
-//O useMemo no caso, não precisaria existir mais.
-//Abraços.
-
+  
   return (
     <div>
       <section className={styles.sidebarContainer}>
