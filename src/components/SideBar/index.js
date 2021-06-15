@@ -14,12 +14,11 @@ export default function SideBar() {
 
   const [selectedComponent, setSelectedComponent] = useState("NewTasks");
   const [search, setSearch] = useState('');
-  const [filteredData, setFilteredData] = useState('');
 
-  
-  const lowerSearch = search.toLowerCase();
-  setFilteredData(datas.filter((prevState) => prevState.title.toLowerCase().includes(lowerSearch)));
-  
+  const filter = useMemo(() => {
+    const lowerSearch = search.toLowerCase();
+    return datas.filter((prevState) => prevState.title.toLowerCase().includes(lowerSearch));
+  }, [search, datas])
 
   const componentsToSelect = {
     InProgressTasks: <InProgressTasks />,
@@ -27,11 +26,6 @@ export default function SideBar() {
     FinishTasks: <FinishTasks />,
   };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setSearch(e.target.value);
-  };
-  
   return (
     <div>
       <section className={styles.sidebarContainer}>
@@ -39,19 +33,19 @@ export default function SideBar() {
           <h4>Próximas entregas</h4>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className={styles.container}>
             <div className={styles.searchInput}>
               <input 
                 type="text" 
                 placeholder="Pesquisar"
                 value={search}
-                onChange={handleSubmit}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
 
             <div className={styles.searchButton}>
-              <button type="submit">
+              <button type="button">
                 <img 
                   src="/search_icon.svg" 
                   className={styles.materialIcons} 
@@ -88,7 +82,7 @@ export default function SideBar() {
         </header>
           
         {search ? (
-          filteredData.map((task, index) => (
+          filter.map((task, index) => (
             <Card task={task}
               key={index}
               date={task.date}
