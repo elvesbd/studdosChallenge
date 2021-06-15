@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { TasksContext } from '../../App';
 
 import NewTasks from '../NewTasks';
 import InProgressTasks from '../InProgressTasks';
 import FinishTasks from '../FinishTasks';
-import SearchInput from '../SearchInput';
 
 import styles from'./styles.module.scss';
 import Card from '../Card';
@@ -14,10 +13,13 @@ export default function SideBar() {
   const datas = useContext(TasksContext)
 
   const [selectedComponent, setSelectedComponent] = useState("NewTasks");
-  const[search, setSearch] = useState('');
+  const [search, setSearch] = useState('');
+  const [filteredData, setFilteredData] = useState('');
 
-  const filter = datas.filter((prevState) => prevState.title === search);
-  console.log(filter);
+  
+  const lowerSearch = search.toLowerCase();
+  setFilteredData(datas.filter((prevState) => prevState.title.toLowerCase().includes(lowerSearch)));
+  
 
   const componentsToSelect = {
     InProgressTasks: <InProgressTasks />,
@@ -27,21 +29,43 @@ export default function SideBar() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-
+    setSearch(e.target.value);
   };
+//Fala Elves, tudo bem?
+//Nesse caso você teria que criar um novo state, filteredData por exemplo.
+//No handleSubmit, você atualiza esse state com os dados filtrados, e é esse state que você utiliza para mostrar os dados na tela. 
+//O useMemo no caso, não precisaria existir mais.
+//Abraços.
 
   return (
-    <div className="body-container">
+    <div>
       <section className={styles.sidebarContainer}>
         <div>
           <h4>Próximas entregas</h4>
         </div>
 
-        <SearchInput  
-          onSearchInput={(e) => setSearch(e.target.value)}
-          onSubmit={handleSubmit}
-        />
+        <form onSubmit={handleSubmit}>
+          <div className={styles.container}>
+            <div className={styles.searchInput}>
+              <input 
+                type="text" 
+                placeholder="Pesquisar"
+                value={search}
+                onChange={handleSubmit}
+              />
+            </div>
+
+            <div className={styles.searchButton}>
+              <button type="submit">
+                <img 
+                  src="/search_icon.svg" 
+                  className={styles.materialIcons} 
+                  alt="Search button"  
+                />
+              </button>
+            </div>
+          </div>
+        </form>
         
         <header className={styles.headerContainer}>
           <div className={styles.headerContent}>
@@ -69,7 +93,7 @@ export default function SideBar() {
         </header>
           
         {search ? (
-          filter.map((task, index) => (
+          filteredData.map((task, index) => (
             <Card task={task}
               key={index}
               date={task.date}
@@ -88,5 +112,3 @@ export default function SideBar() {
     </div>
   );
 };
-
-//{...(selected && { className: 'selected' })}  color={selected ? '#FAE800' : '#FBFBFB'} 
