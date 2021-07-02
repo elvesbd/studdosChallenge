@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { TasksContext } from '../../App';
 
 import NewTasks from '../NewTasks';
@@ -14,17 +14,20 @@ export default function SideBar() {
 
   const [selectedComponent, setSelectedComponent] = useState("NewTasks");
   const [search, setSearch] = useState('');
-
-  const filter = useMemo(() => {
-    const lowerSearch = search.toLowerCase();
-    return datas.filter((prevState) => prevState.title.toLowerCase().includes(lowerSearch));
-  }, [search, datas])
+  const searchInputRef = useRef();  
 
   const componentsToSelect = {
     InProgressTasks: <InProgressTasks />,
     NewTasks: <NewTasks />,
     FinishTasks: <FinishTasks />,
   };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const lowerSearch = searchInputRef.current.value.toLowerCase();
+    const newSearchList = datas.filter((prevState) => prevState.title.toLowerCase().includes(lowerSearch));
+    setSearch(newSearchList);
+  }
 
   return (
     <div>
@@ -33,19 +36,18 @@ export default function SideBar() {
           <h4>Próximas entregas</h4>
         </div>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={styles.container}>
             <div className={styles.searchInput}>
               <input 
                 type="text" 
                 placeholder="Pesquisar"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                ref={searchInputRef}
               />
             </div>
 
             <div className={styles.searchButton}>
-              <button type="button">
+              <button type="submit">
                 <img 
                   src="/search_icon.svg" 
                   className={styles.materialIcons} 
@@ -82,7 +84,7 @@ export default function SideBar() {
         </header>
           
         {search ? (
-          filter.map((task, index) => (
+          search.map((task, index) => (
             <Card task={task}
               key={index}
               date={task.date}
